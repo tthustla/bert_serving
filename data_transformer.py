@@ -118,11 +118,11 @@ def file_based_convert_examples_to_features(
 
         tf_example = tf.train.Example(features=tf.train.Features(feature=features))
         writer.write(tf_example.SerializeToString())
-
-label_list = ColaProcessor.get_labels()
+processor = ColaProcessor()
+label_list = processor.get_labels()
 tokenizer = tokenization.FullTokenizer(
         vocab_file=FLAGS.vocab_file, do_lower_case=FLAGS.do_lower_case)
-eval_examples = ColaProcessor.get_dev_examples(FLAGS.data_dir)
+eval_examples = processor.get_dev_examples(FLAGS.data_dir)
 eval_file = os.path.join(FLAGS.output_dir, "eval.tf_record")
 file_based_convert_examples_to_features(
     eval_examples, label_list, 128, tokenizer, eval_file)

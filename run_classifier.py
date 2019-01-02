@@ -54,6 +54,10 @@ flags.DEFINE_string(
     "export_dir", None,
     "The dir where the exported model will be written.")
 
+flags.DEFINE_string(
+    "import_dir", None,
+    "The dir where the exported model is saved.")
+
 ## Other parameters
 
 flags.DEFINE_string(
@@ -82,6 +86,10 @@ flags.DEFINE_bool(
 flags.DEFINE_bool(
     "do_export", False,
     "Whether to export the model.")
+
+flags.DEFINE_bool(
+    "do_import", False,
+    "Whether to import a saved model.")
 
 flags.DEFINE_integer("train_batch_size", 32, "Total batch size for training.")
 
@@ -947,6 +955,11 @@ def main(_):
             seq_length=FLAGS.max_seq_length,
             is_training=False,
             drop_remainder=predict_drop_remainder)
+        if FLAGS.do_import:
+            with tf.Session() as sess:
+                tf.saved_model.loader.load(sess, [tf.saved_model.tag_constants.SERVING], import_dir)
+                estimator = SavedModelPredictor(import_dir)
+
 
         result = estimator.predict(input_fn=predict_input_fn)
 

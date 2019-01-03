@@ -51,29 +51,29 @@ processor = run_classifier.ColaProcessor()
 label_list = processor.get_labels()
 tokenizer = tokenization.FullTokenizer(vocab_file=VOCAB_FILE, do_lower_case=True)
 
-# train_examples = processor.get_train_examples(TASK_DATA_DIR)
-# num_train_steps = int(
-#     len(train_examples) / TRAIN_BATCH_SIZE * NUM_TRAIN_EPOCHS)
-# num_warmup_steps = int(num_train_steps * WARMUP_PROPORTION)
+train_examples = processor.get_train_examples(TASK_DATA_DIR)
+num_train_steps = int(
+    len(train_examples) / TRAIN_BATCH_SIZE * NUM_TRAIN_EPOCHS)
+num_warmup_steps = int(num_train_steps * WARMUP_PROPORTION)
 
-# model_fn = run_classifier.model_fn_builder(
-#     bert_config=modeling.BertConfig.from_json_file(CONFIG_FILE),
-#     num_labels=len(label_list),
-#     init_checkpoint=INIT_CHECKPOINT,
-#     learning_rate=LEARNING_RATE,
-#     num_train_steps=num_train_steps,
-#     num_warmup_steps=num_warmup_steps,
-#     use_tpu=False,
-#     use_one_hot_embeddings=True)
+model_fn = run_classifier.model_fn_builder(
+    bert_config=modeling.BertConfig.from_json_file(CONFIG_FILE),
+    num_labels=len(label_list),
+    init_checkpoint=INIT_CHECKPOINT,
+    learning_rate=LEARNING_RATE,
+    num_train_steps=num_train_steps,
+    num_warmup_steps=num_warmup_steps,
+    use_tpu=False,
+    use_one_hot_embeddings=True)
 
-# estimator = tf.contrib.tpu.TPUEstimator(
-#     use_tpu=False,
-#     model_fn=model_fn,
-#     # config=run_config,
-#     train_batch_size=TRAIN_BATCH_SIZE,
-#     eval_batch_size=EVAL_BATCH_SIZE)
+estimator = tf.contrib.tpu.TPUEstimator(
+    use_tpu=False,
+    model_fn=model_fn,
+    # config=run_config,
+    train_batch_size=TRAIN_BATCH_SIZE,
+    eval_batch_size=EVAL_BATCH_SIZE)
 
-estimator = tf.contrib.estimator.SavedModelEstimator(BERT_PRETRAINED_DIR)
+# estimator = tf.contrib.estimator.SavedModelEstimator(BERT_PRETRAINED_DIR)
 
 # Eval the model.
 eval_examples = processor.get_dev_examples(TASK_DATA_DIR)

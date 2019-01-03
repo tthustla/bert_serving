@@ -85,7 +85,7 @@ model_fn = run_classifier.model_fn_builder(
 estimator = tf.contrib.tpu.TPUEstimator(
     use_tpu=False,
     model_fn=model_fn,
-    # config=run_config,
+    config=run_config,
     train_batch_size=TRAIN_BATCH_SIZE,
     eval_batch_size=EVAL_BATCH_SIZE)
 

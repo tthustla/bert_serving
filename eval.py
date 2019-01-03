@@ -15,7 +15,7 @@ FLAGS = flags.FLAGS
 #     "than this will be padded.")
 
 flags.DEFINE_string(
-    "export_dir", None,
+    "saved_dir", None,
     "The dir where the exported model has been written.")
 
 flags.DEFINE_string(
@@ -23,13 +23,13 @@ flags.DEFINE_string(
     "The dir where the base model is.")
 
 fflags.DEFINE_string(
-    "data_dir", None,
+    "task_data_dir", None,
     "The input data dir. Should contain the .tsv files (or other data files) "
     "for the task.")
 
-BERT_PRETRAINED_DIR = FLAGS.export_dir
+BERT_PRETRAINED_DIR = FLAGS.saved_dir
 BERT_BASE_DIR = FLAGS.model_dir
-TASK_DATA_DIR = FLAGS.data_dir
+TASK_DATA_DIR = FLAGS.task_data_dir
 # Model Hyper Parameters
 TRAIN_BATCH_SIZE = 32
 EVAL_BATCH_SIZE = 8

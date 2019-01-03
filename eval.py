@@ -22,7 +22,7 @@ flags.DEFINE_string(
     "model_dir", None,
     "The dir where the base model is.")
 
-fflags.DEFINE_string(
+flags.DEFINE_string(
     "task_data_dir", None,
     "The input data dir. Should contain the .tsv files (or other data files) "
     "for the task.")

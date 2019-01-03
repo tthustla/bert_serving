@@ -8,11 +8,11 @@ flags = tf.flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_integer(
-    "max_seq_length", 128,
-    "The maximum total input sequence length after WordPiece tokenization. "
-    "Sequences longer than this will be truncated, and sequences shorter "
-    "than this will be padded.")
+# flags.DEFINE_integer(
+#     "max_seq_length", 128,
+#     "The maximum total input sequence length after WordPiece tokenization. "
+#     "Sequences longer than this will be truncated, and sequences shorter "
+#     "than this will be padded.")
 
 flags.DEFINE_string(
     "export_dir", None,
